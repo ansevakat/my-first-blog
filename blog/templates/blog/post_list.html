@@ -1,22 +1,21 @@
-<html>
-    <head>
-        <title>AWAKE's blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">AWAKE's Blog</a></h1>
-        </div>
 
-        {% for post in posts %}
-            <div>
-                <p>published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h1>
-                <p>{{ post.text|linebreaks }}</p>
+
+{% extends 'blog/base.html' %}
+
+   {% block content %}
+        <div class="row">
+              <div class="col-md-8">
+                  {% for post in posts %}
+                      <div class="post">
+                          <div class="date">
+                              <p>published: {{ post.published_date }}</p>
+                          </div>
+                          <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                          <p>{{ post.text|linebreaks }}</p>
+                      </div>
+                  {% endfor %}
+              </div>
             </div>
-        {% endfor %}
-        <div>
-            <h1><a href="">to be continued</a></h1>
-        </div>
+              <h2><a href="http://tedxcern.web.cern.ch/video/2015/surfing-wakefields-create-smaller-accelerators">Check out the AWAKE TEDx talk</a></h2>
 
-    </body>
-</html>
+      {% endblock %}
